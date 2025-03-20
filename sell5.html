@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendre un Produit</title>
+    <link rel="stylesheet" href="sell.css">
+</head>
+<body>
+    <header>
+        <h1>Publier une Annonce</h1>
+        <nav>
+            <a href="index2.html">Accueil</a>
+            <a href="profil.html">Profil</a>
+            <a href="message.html">Messages</a>
+            <a href="notification.html">Notifications</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Informations sur l'Annonce</h2>
+        
+        <!-- Sélection de la catégorie -->
+        <div class="form-group">
+            <label for="categorie">Catégorie :</label>
+            <select id="categorie" name="categorie">
+                <option value="voiture">Voiture</option>
+                <option value="electronique">Électronique</option>
+                <option value="fourniture">Fourniture domestique</option>
+                <option value="fashion">Fashion</option>
+                <option value="sport">Sport</option>
+                <option value="emploi">Emploi</option>
+                <option value="service">Service</option>
+                <option value="animal">Animal</option>
+                <option value="produit_agricole">Produit Agricole</option>
+                <option value="equipement_commercial">Équipement Commercial</option>
+                <option value="cv">CV</option>
+                <option value="reparation">Réparation</option>
+                <option value="autres">Autres</option>
+            </select>
+        </div>
+
+       
+
+        <!-- Sélection de la localisation -->
+        <div class="form-group">
+            <label for="region">Localisation :</label>
+            <select id="region" name="region">
+                <option value="savane">Savane</option>
+                <option value="kara">Kara</option>
+                <option value="plateau">Plateaux</option>
+                <option value="centrale">Centrale</option>
+                <option value="lome">Lomé</option>
+            </select>
+        </div>
+
+
+
+        <label for="frais">Titre :</label>
+        <input type="text" id="Titre" name="Titre">
+
+        <label for="frais">Type:</label>
+        <input type="text" id="type" name="Type">
+
+        <label for="frais">Description :</label>
+        <input type="text" id="Description" name="Description">
+
+        <label for="frais">prix :</label>
+        <input type="text" id="prix" name="prix">
+        
+         
+        <label for="delai">Durée de livraison :</label>
+        <input type="text" id="delai" name="delai" placeholder="Ex: 2-3 jours">
+
+        <label for="frais">Frais de livraison :</label>
+        <select id="frais" name="frais">
+            <option value="oui">Oui</option>
+            <option value="non">Non</option>
+        </select>
+
+        <label for="sauvegarde">Sauvegarder ces infos de livraison ?</label>
+        <select id="sauvegarde" name="sauvegarde">
+            <option value="oui">Oui</option>
+            <option value="non">Non</option>
+        </select>
+         
+
+    </div>
+    
+
+
+        <!-- Bouton pour se localiser avec Google Maps -->
+        <div class="form-group">
+            <button id="btnLocaliser">Se localiser sur la carte</button>
+        </div>
+
+        <!-- Téléchargement des photos -->
+        <div class="form-group">
+            <label for="photoInput">Télécharger une photo :</label>
+            <input type="file" id="photoInput" accept="image/*" multiple>
+        </div>
+
+        <button id="uploadBtn">Télécharger</button>
+
+        <!-- Bouton pour passer à l'étape suivante -->
+        <a href="post.html" id="btnsuivant"><button>Ajouter</button></a>
+    </div>
+
+    <script>
+        document.getElementById("btnLocaliser").addEventListener("click", function () {
+            window.open("https://www.google.com/maps", "_blank");
+        });
+    </script>
+
+     <script>
+    document.getElementById('uploadBtn').addEventListener('click', function() {
+        const fileInput = document.getElementById('photoInput');
+        const files = fileInput.files;
+
+        if (files.length > 0) {
+            let photosData = JSON.parse(localStorage.getItem('photos')) || []; 
+
+            for (let i = 0; i < files.length; i++) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    let photoData = {
+                        url: e.target.result, 
+                        titre: document.getElementById('Titre').value || "Sans titre",
+                        type: document.getElementById('type').value || "Non spécifié",
+                        description: document.getElementById('Description').value || "Aucune description",
+                        prix: document.getElementById('prix').value || "Non précisé",
+                        region: document.getElementById('region').value || "Non précisé"
+                    };
+
+                    photosData.push(photoData);
+                    localStorage.setItem('photos', JSON.stringify(photosData));
+
+                    console.log("📸 Photos enregistrées :", localStorage.getItem('photos'));
+                };
+                reader.readAsDataURL(files[i]);
+            }
+        }
+    });
+</script>
+
+
+</body>
+</html>

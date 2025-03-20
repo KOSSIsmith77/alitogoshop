@@ -1,0 +1,147 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 14px;
+    color: #555;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Specific styles for forms (login or signup) */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+    .container {
+        width: 90%;
+    }
+}
+.back-button {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    background-color: #007bff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+.social-login {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+.social-login button {
+    background-color: #4285F4; /* Google color */
+    margin-bottom: 10px;
+}
+
+
+
+
+
+#google-login {
+    background-color: #4285F4; /* Google color */
+}
+
+#microsoft-login {
+    background-color: #0078D4; /* Microsoft color */
+}
+
+#icloud-login {
+    background-color: #000000; /* iCloud color */
+}
+
+a {
+    text-align: center;
+    display: block;
+    margin-top: 15px;
+    color: #4CAF50;
+}
+#google-login i {
+    color: white;
+}
+
+#microsoft-login i {
+    color: white;
+}
+
+#icloud-login i {
+    color: white;
+}

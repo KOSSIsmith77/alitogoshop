@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body class="login"> <!-- Ajout de la classe login -->
+
+    <div class="form-container">
+        <h2>Connexion</h2>
+        <form id="login-form">
+            <input type="text" id="login" placeholder="Email ou Téléphone" required>
+            <input type="password" id="password" placeholder="Mot de passe" required>
+            <button type="submit">Se connecter</button>
+        </form>
+        <p>Pas encore inscrit ? <a href="singup.html">Créer un compte</a></p>
+        <script src="script.js"></script>
+    </div>
+
+    <script>
+        document.getElementById("login-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Empêche l'envoi classique du formulaire
+            alert("Connexion réussie !");
+            window.location.href = "index2.html"; // Redirection vers l'accueil
+        });
+    </script>
+ 
+</body>
+</html>

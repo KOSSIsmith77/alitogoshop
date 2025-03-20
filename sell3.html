@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abonnement</title>
+    <link rel="stylesheet" href="sell3.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Choisir un abonnement</h2>
+        <label for="plan">Type d'abonnement :</label>
+        <select id="plan">
+            <option value="">Sélectionner...</option>
+            <option value="basique">Basique - 2300 F CFA</option>
+            <option value="medium">Medium - 5000 F CFA</option>
+            <option value="premium">Premium - 12000 F CFA</option>
+        </select>
+
+        <label for="duree">Durée :</label>
+        <select id="duree">
+            <option value="1">1 mois</option>
+            <option value="3">3 mois</option>
+            <option value="6">6 mois</option>
+            <option value="12">1 an</option>
+        </select>
+
+        <label for="payment">Moyen de paiement :</label>
+        <select id="payment">
+            <option value="">Sélectionner...</option>
+            <option value="yas">Yas Togo</option>
+            <option value="moov">Moov Africa</option>
+            <option value="visa">Visa</option>
+            <option value="carte">Carte Bancaire</option>
+        </select>
+
+        <div id="phoneField" class="hidden">
+            <label for="phone">Numéro de téléphone :</label>
+            <input type="tel" id="phone" placeholder="Ex: 90 00 00 00">
+        </div>
+
+        <div id="cardField" class="hidden">
+            <label for="card">Numéro de carte bancaire :</label>
+            <input type="text" id="card" placeholder="Ex: 1234 5678 9012 3456">
+        </div>
+
+        <label for="code">Code vendeur (si existant) :</label>
+        <input type="text" id="code" placeholder="Entrez votre code vendeur">
+
+        <button class="button" id="valider">S'abonner</button>
+    </div>
+    <script src="script3.js"></script>
+</body>
+</html>

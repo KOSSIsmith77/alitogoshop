@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendre un Produit</title>
+    <link rel="stylesheet" href="sell.css">
+</head>
+<body>
+    <header>
+        <h1>Publier une Annonce</h1>
+        <nav>
+            <a href="index2.html">Accueil</a>
+            <a href="profil.html">Profil</a>
+            <a href="message.html">Messages</a>
+            <a href="notification.html">Notifications</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Informations sur l'Annonce</h2>
+        
+        <!-- Sélection de la catégorie -->
+        <div class="form-group">
+            <label for="categorie">Catégorie :</label>
+            <select id="categorie" name="categorie">
+                <option value="voiture">Voiture</option>
+                <option value="electronique">Électronique</option>
+                <option value="fourniture">Fourniture domestique</option>
+                <option value="fashion">Fashion</option>
+                <option value="sport">Sport</option>
+                <option value="emploi">Emploi</option>
+                <option value="service">Service</option>
+                <option value="animal">Animal</option>
+                <option value="produit_agricole">Produit Agricole</option>
+                <option value="equipement_commercial">Équipement Commercial</option>
+                <option value="cv">CV</option>
+                <option value="reparation">Réparation</option>
+                <option value="autres">Autres</option>
+            </select>
+        </div>
+
+        <!-- Ajout de photo -->
+        <div class="form-group">
+            <label for="photo">Ajouter une photo :</label>
+            <input type="file" id="photo" name="photo" accept="image/*">
+        </div>
+
+        <!-- Sélection de la localisation -->
+        <div class="form-group">
+            <label for="region">Localisation :</label>
+            <select id="region" name="region">
+                <option value="savane">Savane</option>
+                <option value="kara">Kara</option>
+                <option value="plateau">Plateaux</option>
+                <option value="centrale">Centrale</option>
+                <option value="lome">Lomé</option>
+            </select>
+        </div>
+
+        <!-- Bouton pour se localiser avec Google Maps -->
+        <div class="form-group">
+            <button id="btnLocaliser">Se localiser sur la carte</button>
+        </div>
+
+        <!-- Bouton pour passer à l'étape suivante -->
+        <a href="sell2.html"> <button id="btnsuivant">suivant</button></a>
+    </div>
+
+    <script>
+        document.getElementById("btnLocaliser").addEventListener("click", function () {
+            window.open("https://www.google.com/maps", "_blank");
+        });
+    </script>
+</body>
+</html>

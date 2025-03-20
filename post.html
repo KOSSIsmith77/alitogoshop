@@ -1,0 +1,100 @@
+ 
+
+
+ <!DOCTYPE html>
+ <html lang="fr">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Ajouter des Photos</title>
+     <link rel="stylesheet" href="post.css">
+ </head>
+ <body>
+     <header>
+         <h1>Voir les Photos Ajoutées</h1>
+         <nav>
+             <a href="index2.html">Retour à la page d'accueil</a>
+         </nav>
+     </header>
+ 
+     <div class="container">
+         <h2>Galerie des Photos</h2>
+         <!-- Champ de recherche -->
+         <input type="text" id="searchInput" placeholder="Rechercher par titre, type, région..." onkeyup="rechercher()">
+         <!-- Galerie des photos -->
+         <div id="photoGallery" class="gallery"></div>
+     </div>
+
+
+     <script>
+        // Récupérer les photos stockées dans le localStorage
+        const photoGallery = document.getElementById('photoGallery');
+        const photos = JSON.parse(localStorage.getItem('photos'));
+
+        // Si des photos sont disponibles, les afficher dans la galerie
+        if (photos && photos.length > 0) {
+            photos.forEach(function(photoUrl) {
+                const imgElement = document.createElement('img');
+                imgElement.src = photoUrl;
+                imgElement.alt = 'Photo';
+                imgElement.title = 'Photo';
+                imgElement.style.margin = '10px';
+                imgElement.style.width = '150px';
+                imgElement.style.height = '150px';
+                imgElement.style.objectFit = 'cover';
+                imgElement.style.borderRadius = '8px';
+
+                photoGallery.appendChild(imgElement);
+            });
+        } else {
+            photoGallery.innerHTML = '<p>Aucune photo téléchargée.</p>';
+        }
+    </script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const photoGallery = document.getElementById('photoGallery');
+
+        if (!photoGallery) {
+            console.error("❌ Erreur : L'élément photoGallery n'existe pas !");
+            return;
+        } else {
+            console.log("✅ Élément photoGallery trouvé !");
+        }
+
+        const photos = JSON.parse(localStorage.getItem('photos')) || [];
+        console.log("📸 Photos récupérées :", photos);
+
+        if (photos.length === 0) {
+            console.warn("⚠️ Aucune photo trouvée !");
+        }
+
+        function afficherPhotos(photosFiltrees) {
+            photoGallery.innerHTML = '';
+            if (photosFiltrees.length > 0) {
+                photosFiltrees.forEach(photo => {
+                    console.log("Affichage photo :", photo);
+                    
+                    const div = document.createElement('div');
+                    div.className = 'photo-item';
+                    div.innerHTML = `
+                        <img src="${photo.url}" alt="Photo" style="width: 150px; height: 150px; object-fit: cover;">
+                        <p><strong>${photo.titre}</strong></p>
+                        <p>Type: ${photo.type}</p>
+                        <p>Prix: ${photo.prix} FCFA</p>
+                        <p>Localisation: ${photo.region}</p>
+                    `;
+                    photoGallery.appendChild(div);
+                });
+            } else {
+                photoGallery.innerHTML = '<p>Aucune photo trouvée.</p>';
+            }
+        }
+
+        afficherPhotos(photos);
+    });
+</script>
+
+</body>
+</html>

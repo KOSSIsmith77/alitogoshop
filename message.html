@@ -1,0 +1,40 @@
+ 
+
+ <!-- messages.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages</title>
+    <link rel="stylesheet" href="message.css">
+</head>
+<body>
+
+    <header>
+        <h1>Messages</h1>
+        <nav>
+            <ul>
+                <li><a href="Profil.html">Profil</a></li>
+                <li><a href="notification.html">Notifications</a></li>
+                <li><a href="message.html">Messages</a></li>
+            </ul>
+        </nav>
+    </header>
+
+     
+    <div class="chat-container">
+        <div class="chat-header">Discussion</div>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input">
+            <input type="text" id="message-input" placeholder="Écrire un message...">
+            <button onclick="sendMessage()">Envoyer</button>
+        </div>
+    </div>
+    <script src="message.js"></script>
+</body>
+</html>
+
+     
+
+     

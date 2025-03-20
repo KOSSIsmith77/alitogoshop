@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="singup.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> <!-- Font Awesome -->
+    <!-- Google Sign-In -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <!-- Apple Sign-In -->
+    <script type="text/javascript" src="https://appleid.apple.com/appleid/2.0/js/sign-in-apple.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://alcdn.msftauth.net/browser/2.3.3/js/msal.min.js"></script>
+    <script src="https://appleid.apple.com/appleid/auth/appleid.js"></script>
+
+</head>
+<body class="singnup"> <!-- Ajout de la classe singnup -->
+
+    <div class="form-container">
+        <h2>Inscription</h2>
+        <form id="singnup-form">
+            <input type="text" id="first-name" placeholder="Nom" required>
+            <input type="text" id="last-name" placeholder="Prénom" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="tel" id="phone" placeholder="+228xxxxxxxx" required>
+            <input type="password" id="password" placeholder="Mot de passe" required>
+            <button type="submit">S'inscrire</button>
+        </form>
+
+        <div class="social-login">
+            <button id="google-login">
+                <i class="fab fa-google"></i> Se connecter avec Google
+            </button>
+            <button id="microsoft-login">
+                <i class="fab fa-microsoft"></i> Se connecter avec Microsoft
+            </button>
+            <button id="icloud-login">
+                <i class="fab fa-apple"></i> Se connecter avec iCloud
+            </button>
+        </div>
+
+        <p>Déjà un compte ? <a href="login.html">Se connecter</a></p>
+        <script src="script.js"></script>
+
+    </div>
+
+    <script>
+        document.getElementById("singnup-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Empêche l'envoi classique du formulaire
+            alert("Inscription réussie !");
+            window.location.href = "index2.html"; // Redirection vers l'accueil
+        });
+    </script>
+
+ 
+
+     <script src="script.js"></script>
+
+
+ 
