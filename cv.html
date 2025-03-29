@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Déposer un CV</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        .container { width: 50%; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        input, textarea, button { margin: 10px; padding: 10px; width: 80%; }
+        button { background: #007bff; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h1>Déposez votre CV</h1>
+    <div class="container">
+        <input type="file" id="cvUpload" accept=".pdf,.doc,.docx">
+        <input type="text" id="linkedin" placeholder="Lien LinkedIn (optionnel)">
+        <textarea id="cvText" placeholder="Ou remplissez directement votre CV ici"></textarea>
+        <button onclick="analyserCV()">Analyser mon CV</button>
+        <p id="resultat"></p>
+        <button id="voirOffres" style="display: none;" onclick="window.location.href='emploi.html'">Voir les offres adaptées</button>
+    </div>
+
+    <script>
+        function analyserCV() {
+            let motsCles =  [
+      "marketing","développeur", "gestion", "finance", "ingénierie", "santé", "éducation", "commerce", 
+    "vente", "informatique", "comptable", "juridique", "logistique", "transport", "tourisme", 
+    "hôtellerie", "design", "communication", "agriculture", "industrie", "artisanat", "services à la personne"
+];
+            let resultat = document.getElementById("resultat");
+            let offreBouton = document.getElementById("voirOffres");
+            
+            let cvTexte = document.getElementById("cvText").value || "développeur"; // Simulation de lecture du CV
+            let match = motsCles.find(mot => cvTexte.includes(mot));
+
+            if (match) {
+                resultat.innerHTML = `Nous avons trouvé des offres en <strong>${match}</strong>.`;
+                offreBouton.style.display = "block";
+            } else {
+                resultat.innerHTML = "Aucune offre correspondante trouvée.";
+            }
+        }
+    </script>
+
+</body>
+</html>

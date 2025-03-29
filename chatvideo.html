@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat en Direct</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+        }
+        #chatContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            height: 300px;
+            overflow-y: scroll;
+        }
+        .chatMessage {
+            background-color: #e4e4e4;
+            padding: 10px;
+            border-radius: 5px;
+            width: fit-content;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Chat en Direct</h1>
+    </header>
+    <main>
+        <div id="chatContainer">
+            <!-- Messages du chat vont ici -->
+        </div>
+        <textarea id="messageInput" placeholder="Tapez votre message..."></textarea>
+        <button id="sendMessage">Envoyer</button>
+    </main>
+    <script>
+        document.getElementById('sendMessage').addEventListener('click', function() {
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value;
+
+            if (message) {
+                // Création d'un nouveau message à afficher
+                const messageContainer = document.createElement('div');
+                messageContainer.classList.add('chatMessage');
+                messageContainer.textContent = message;
+
+                // Ajout du message au chat
+                const chatContainer = document.getElementById('chatContainer');
+                chatContainer.appendChild(messageContainer);
+
+                // Faire défiler automatiquement vers le bas après l'envoi d'un message
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+
+                // Réinitialiser la zone de texte
+                messageInput.value = '';
+            }
+        });
+
+        // Permet de soumettre en appuyant sur la touche "Entrée"
+        document.getElementById('messageInput').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('sendMessage').click();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -3,59 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription</title>
+    <title>Réinitialisation du mot de passe</title>
     <link rel="stylesheet" href="singup.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> <!-- Font Awesome -->
-    <!-- Google Sign-In -->
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <!-- Apple Sign-In -->
-    <script type="text/javascript" src="https://appleid.apple.com/appleid/2.0/js/sign-in-apple.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="https://alcdn.msftauth.net/browser/2.3.3/js/msal.min.js"></script>
-    <script src="https://appleid.apple.com/appleid/auth/appleid.js"></script>
+    <style>
+        
 
+        /* Similar styling as before */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .form-box h2 {
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
-<body class="singnup"> <!-- Ajout de la classe singnup -->
-
-    <div class="form-container">
-        <h2>Inscription</h2>
-        <form id="singnup-form">
-            <input type="text" id="first-name" placeholder="Nom" required>
-            <input type="text" id="last-name" placeholder="Prénom" required>
-            <input type="email" id="email" placeholder="Email" required>
-            <input type="tel" id="phone" placeholder="+228xxxxxxxx" required>
-            <input type="password" id="password" placeholder="Mot de passe" required>
-            <button type="submit">S'inscrire</button>
-        </form>
-
-        <div class="social-login">
-            <button id="google-login">
-                <i class="fab fa-google"></i> Se connecter avec Google
-            </button>
-            <button id="microsoft-login">
-                <i class="fab fa-microsoft"></i> Se connecter avec Microsoft
-            </button>
-            <button id="icloud-login">
-                <i class="fab fa-apple"></i> Se connecter avec iCloud
-            </button>
+<body>
+    <div class="login-container">
+        <div class="form-box">
+            <h2>Réinitialisation du mot de passe</h2>
+            <form id="reset-password-form">
+                <div class="input-group">
+                    <input type="text" id="reset-identifier" placeholder="Email ou Numéro" required>
+                </div>
+                <button type="submit">Envoyer le lien de réinitialisation</button>
+            </form>
+            <p><a href="login.html">Retour à la connexion</a></p>
         </div>
-
-        <p>Déjà un compte ? <a href="login.html">Se connecter</a></p>
-        <script src="script.js"></script>
-
     </div>
 
     <script>
-        document.getElementById("singnup-form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Empêche l'envoi classique du formulaire
-            alert("Inscription réussie !");
-            window.location.href = "index2.html"; // Redirection vers l'accueil
+        document.addEventListener("DOMContentLoaded", () => {
+            const resetPasswordForm = document.getElementById("reset-password-form");
+
+            // Réinitialisation du mot de passe
+            resetPasswordForm.addEventListener("submit", (event) => {
+                event.preventDefault();
+
+                const identifier = document.getElementById("reset-identifier").value;
+                const users = JSON.parse(localStorage.getItem("users")) || [];
+                const user = users.find(user => user.email === identifier || user.phone === identifier);
+
+                if (!user) {
+                    alert("Aucun utilisateur trouvé avec cet email ou numéro.");
+                    return;
+                }
+
+                alert("Un lien de réinitialisation a été envoyé à votre adresse email.");
+            });
         });
     </script>
+</body>
+</html>
 
- 
-
-     <script src="script.js"></script>
 
 
  

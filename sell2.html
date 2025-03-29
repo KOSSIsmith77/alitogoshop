@@ -77,7 +77,13 @@
                 <option value="oui">Oui</option>
                 <option value="non">Non</option>
             </select>
-             
+            <script>
+             function traduire(langue) {
+    let traductions = { "fr": "Bienvenue", "en": "Welcome", "es": "Bienvenido" };
+    document.getElementById("titre").textContent = traductions[langue] || "Bienvenue";
+}
+    
+            </script>  
 
         </div>
         <a href="sell3.html"><button id="btnSuivant">Suivant</button></a> 

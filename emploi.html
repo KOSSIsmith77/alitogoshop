@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offres d'emploi</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        .container { width: 60%; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        input, select, textarea, button { margin: 10px; padding: 10px; width: 80%; }
+        button { background: #28a745; color: white; border: none; cursor: pointer; }
+        .job { border-bottom: 1px solid #ccc; padding: 10px; }
+    </style>
+</head>
+<body>
+
+    <h1>Offres d'emploi disponibles</h1>
+    
+    <div class="container">
+        <input type="text" id="search" placeholder="Rechercher un emploi..." onkeyup="filtrerEmplois()">
+        <select id="categorieFilter" onchange="filtrerEmplois()">
+            <option value="">Toutes les catégories</option>
+             
+             
+                <option value="Informatique">Informatique</option>
+                <option value="Développeur Web">Développeur Web</option>
+                <option value="Développeur Mobile">Développeur Mobile</option>
+                <option value="Ingénieur Logiciel">Ingénieur Logiciel</option>
+                <option value="Analyste de données">Analyste de données</option>
+                <option value="Administrateur système">Administrateur système</option>
+                <option value="Sécurité informatique">Sécurité informatique</option>
+                <option value="Gestion de base de données">Gestion de base de données</option>
+                <option value="Concepteur UX/UI">Concepteur UX/UI</option>
+            
+                <option value="Marketing">Marketing</option>
+                <option value="Responsable Marketing">Responsable Marketing</option>
+                <option value="Community Manager">Community Manager</option>
+                <option value="Spécialiste SEO">Spécialiste SEO</option>
+                <option value="Rédacteur Web">Rédacteur Web</option>
+                <option value="Analyste Marketing">Analyste Marketing</option>
+                <option value="Responsable Relations Publiques">Responsable Relations Publiques</option>
+            
+                <option value="Finance">Finance</option>
+                <option value="Comptable">Comptable</option>
+                <option value="Analyste financier">Analyste financier</option>
+                <option value="Consultant financier">Consultant financier</option>
+                <option value="Auditeur">Auditeur</option>
+                <option value="Responsable trésorerie">Responsable trésorerie</option>
+                <option value="Gestionnaire de portefeuille">Gestionnaire de portefeuille</option>
+            
+                <option value="Ressources humaines">Ressources humaines</option>
+                <option value="Responsable RH">Responsable RH</option>
+                <option value="Recruteur">Recruteur</option>
+                <option value="Gestionnaire de la paie">Gestionnaire de la paie</option>
+                <option value="Formateur">Formateur</option>
+                <option value="Gestionnaire des talents">Gestionnaire des talents</option>
+            
+                <option value="Commerce et Vente">Commerce et Vente</option>
+                <option value="Responsable des ventes">Responsable des ventes</option>
+                <option value="Commercial terrain">Commercial terrain</option>
+                <option value="Gestionnaire de compte client">Gestionnaire de compte client</option>
+                <option value="Directeur de magasin">Directeur de magasin</option>
+                <option value="Représentant des ventes">Représentant des ventes</option>
+            
+                <option value="Santé et Soins">Santé et Soins</option>
+                <option value="Médecin">Médecin</option>
+                <option value="Infirmier">Infirmier</option>
+                <option value="Aide-soignant">Aide-soignant</option>
+                <option value="Pharmacien">Pharmacien</option>
+                <option value="Psychologue">Psychologue</option>
+                <option value="Technicien de laboratoire">Technicien de laboratoire</option>
+            
+                <option value="Éducation et Formation">Éducation et Formation</option>
+                <option value="Enseignant">Enseignant</option>
+                <option value="Formateur professionnel">Formateur professionnel</option>
+                <option value="Tuteur">Tuteur</option>
+                <option value="Pédagogue">Pédagogue</option>
+                <option value="Conseiller pédagogique">Conseiller pédagogique</option>
+            
+                <option value="Ingénierie et Architecture">Ingénierie et Architecture</option>
+                <option value="Ingénieur civil">Ingénieur civil</option>
+                <option value="Architecte">Architecte</option>
+                <option value="Ingénieur mécanique">Ingénieur mécanique</option>
+                <option value="Ingénieur en électronique">Ingénieur en électronique</option>
+                <option value="Géotechnicien">Géotechnicien</option>
+            
+                <option value="Industrie et Fabrication">Industrie et Fabrication</option>
+                <option value="Ouvrier de production">Ouvrier de production</option>
+                <option value="Chef d'équipe de production">Chef d'équipe de production</option>
+                <option value="Technicien de maintenance">Technicien de maintenance</option>
+                <option value="Ingénieur qualité">Ingénieur qualité</option>
+                <option value="Responsable logistique">Responsable logistique</option>
+            
+                <option value="Art, Créativité et Design">Art, Créativité et Design</option>
+                <option value="Designer graphique">Designer graphique</option>
+                <option value="Photographe">Photographe</option>
+                <option value="Vidéaste">Vidéaste</option>
+                <option value="Illustrateur">Illustrateur</option>
+                <option value="Artiste visuel">Artiste visuel</option>
+                <option value="Styliste">Styliste</option>
+            
+                <option value="Droit et Légal">Droit et Légal</option>
+                <option value="Avocat">Avocat</option>
+                <option value="Notaire">Notaire</option>
+                <option value="Juriste d'entreprise">Juriste d'entreprise</option>
+                <option value="Greffier">Greffier</option>
+                <option value="Paralegal">Paralegal</option>
+            
+                <option value="Transport et Logistique">Transport et Logistique</option>
+                <option value="Chauffeur">Chauffeur</option>
+                <option value="Gestionnaire de la chaîne d'approvisionnement">Gestionnaire de la chaîne d'approvisionnement</option>
+                <option value="Responsable des transports">Responsable des transports</option>
+                <option value="Conducteur de chariot élévateur">Conducteur de chariot élévateur</option>
+                <option value="Agent de sécurité">Agent de sécurité</option>
+            
+                <option value="Tourisme et Hôtellerie">Tourisme et Hôtellerie</option>
+                <option value="Réceptionniste">Réceptionniste</option>
+                <option value="Guide touristique">Guide touristique</option>
+                <option value="Chef cuisinier">Chef cuisinier</option>
+                <option value="Directeur d'hôtel">Directeur d'hôtel</option>
+                <option value="Serveur/serveuse">Serveur/serveuse</option>
+            
+                <option value="Agriculture et Environnement">Agriculture et Environnement</option>
+                <option value="Agriculteur">Agriculteur</option>
+                <option value="Ouvrier agricole">Ouvrier agricole</option>
+                <option value="Forestier">Forestier</option>
+                <option value="Technicien environnemental">Technicien environnemental</option>
+                <option value="Spécialiste en gestion des déchets">Spécialiste en gestion des déchets</option>
+            
+                <option value="Services à la personne">Services à la personne</option>
+                <option value="Aide à domicile">Aide à domicile</option>
+                <option value="Garde d'enfants">Garde d'enfants</option>
+                <option value="Assistant de vie">Assistant de vie</option>
+                <option value="Soins aux personnes âgées">Soins aux personnes âgées</option>
+             
+ 
+        </select>
+
+        <h2>Liste des Offres</h2>
+        <div id="jobList"></div>
+
+        <h3>Suivi de votre candidature</h3>
+        <p id="suiviCandidature">Aucune candidature en cours.</p>
+        <button onclick="window.location.href='cv.html'">Modifier mon CV</button>
+    </div>
+
+    <h2>Publier une Offre d'Emploi</h2>
+    <div class="container">
+        <input type="text" id="jobTitle" placeholder="Titre du poste">
+        <input type="text" id="jobSalary" placeholder="Salaire (ex: 500.000 FCFA)">
+        <input type="text" id="jobPhone" placeholder="Numéro de contact">
+        <input type="email" id="jobEmail" placeholder="Email du recruteur">
+        <input type="file" id="jobPhoto" accept="image/*">
+        <select id="jobCategory">
+             
+             
+                <option value="Informatique">Informatique</option>
+                <option value="Développeur Web">Développeur Web</option>
+                <option value="Développeur Mobile">Développeur Mobile</option>
+                <option value="Ingénieur Logiciel">Ingénieur Logiciel</option>
+                <option value="Analyste de données">Analyste de données</option>
+                <option value="Administrateur système">Administrateur système</option>
+                <option value="Sécurité informatique">Sécurité informatique</option>
+                <option value="Gestion de base de données">Gestion de base de données</option>
+                <option value="Concepteur UX/UI">Concepteur UX/UI</option>
+            
+                <option value="Marketing">Marketing</option>
+                <option value="Responsable Marketing">Responsable Marketing</option>
+                <option value="Community Manager">Community Manager</option>
+                <option value="Spécialiste SEO">Spécialiste SEO</option>
+                <option value="Rédacteur Web">Rédacteur Web</option>
+                <option value="Analyste Marketing">Analyste Marketing</option>
+                <option value="Responsable Relations Publiques">Responsable Relations Publiques</option>
+            
+                <option value="Finance">Finance</option>
+                <option value="Comptable">Comptable</option>
+                <option value="Analyste financier">Analyste financier</option>
+                <option value="Consultant financier">Consultant financier</option>
+                <option value="Auditeur">Auditeur</option>
+                <option value="Responsable trésorerie">Responsable trésorerie</option>
+                <option value="Gestionnaire de portefeuille">Gestionnaire de portefeuille</option>
+            
+                <option value="Ressources humaines">Ressources humaines</option>
+                <option value="Responsable RH">Responsable RH</option>
+                <option value="Recruteur">Recruteur</option>
+                <option value="Gestionnaire de la paie">Gestionnaire de la paie</option>
+                <option value="Formateur">Formateur</option>
+                <option value="Gestionnaire des talents">Gestionnaire des talents</option>
+            
+                <option value="Commerce et Vente">Commerce et Vente</option>
+                <option value="Responsable des ventes">Responsable des ventes</option>
+                <option value="Commercial terrain">Commercial terrain</option>
+                <option value="Gestionnaire de compte client">Gestionnaire de compte client</option>
+                <option value="Directeur de magasin">Directeur de magasin</option>
+                <option value="Représentant des ventes">Représentant des ventes</option>
+            
+                <option value="Santé et Soins">Santé et Soins</option>
+                <option value="Médecin">Médecin</option>
+                <option value="Infirmier">Infirmier</option>
+                <option value="Aide-soignant">Aide-soignant</option>
+                <option value="Pharmacien">Pharmacien</option>
+                <option value="Psychologue">Psychologue</option>
+                <option value="Technicien de laboratoire">Technicien de laboratoire</option>
+            
+                <option value="Éducation et Formation">Éducation et Formation</option>
+                <option value="Enseignant">Enseignant</option>
+                <option value="Formateur professionnel">Formateur professionnel</option>
+                <option value="Tuteur">Tuteur</option>
+                <option value="Pédagogue">Pédagogue</option>
+                <option value="Conseiller pédagogique">Conseiller pédagogique</option>
+            
+                <option value="Ingénierie et Architecture">Ingénierie et Architecture</option>
+                <option value="Ingénieur civil">Ingénieur civil</option>
+                <option value="Architecte">Architecte</option>
+                <option value="Ingénieur mécanique">Ingénieur mécanique</option>
+                <option value="Ingénieur en électronique">Ingénieur en électronique</option>
+                <option value="Géotechnicien">Géotechnicien</option>
+            
+                <option value="Industrie et Fabrication">Industrie et Fabrication</option>
+                <option value="Ouvrier de production">Ouvrier de production</option>
+                <option value="Chef d'équipe de production">Chef d'équipe de production</option>
+                <option value="Technicien de maintenance">Technicien de maintenance</option>
+                <option value="Ingénieur qualité">Ingénieur qualité</option>
+                <option value="Responsable logistique">Responsable logistique</option>
+            
+                <option value="Art, Créativité et Design">Art, Créativité et Design</option>
+                <option value="Designer graphique">Designer graphique</option>
+                <option value="Photographe">Photographe</option>
+                <option value="Vidéaste">Vidéaste</option>
+                <option value="Illustrateur">Illustrateur</option>
+                <option value="Artiste visuel">Artiste visuel</option>
+                <option value="Styliste">Styliste</option>
+            
+                <option value="Droit et Légal">Droit et Légal</option>
+                <option value="Avocat">Avocat</option>
+                <option value="Notaire">Notaire</option>
+                <option value="Juriste d'entreprise">Juriste d'entreprise</option>
+                <option value="Greffier">Greffier</option>
+                <option value="Paralegal">Paralegal</option>
+            
+                <option value="Transport et Logistique">Transport et Logistique</option>
+                <option value="Chauffeur">Chauffeur</option>
+                <option value="Gestionnaire de la chaîne d'approvisionnement">Gestionnaire de la chaîne d'approvisionnement</option>
+                <option value="Responsable des transports">Responsable des transports</option>
+                <option value="Conducteur de chariot élévateur">Conducteur de chariot élévateur</option>
+                <option value="Agent de sécurité">Agent de sécurité</option>
+            
+                <option value="Tourisme et Hôtellerie">Tourisme et Hôtellerie</option>
+                <option value="Réceptionniste">Réceptionniste</option>
+                <option value="Guide touristique">Guide touristique</option>
+                <option value="Chef cuisinier">Chef cuisinier</option>
+                <option value="Directeur d'hôtel">Directeur d'hôtel</option>
+                <option value="Serveur/serveuse">Serveur/serveuse</option>
+            
+                <option value="Agriculture et Environnement">Agriculture et Environnement</option>
+                <option value="Agriculteur">Agriculteur</option>
+                <option value="Ouvrier agricole">Ouvrier agricole</option>
+                <option value="Forestier">Forestier</option>
+                <option value="Technicien environnemental">Technicien environnemental</option>
+                <option value="Spécialiste en gestion des déchets">Spécialiste en gestion des déchets</option>
+            
+                <option value="Services à la personne">Services à la personne</option>
+                <option value="Aide à domicile">Aide à domicile</option>
+                <option value="Garde d'enfants">Garde d'enfants</option>
+                <option value="Assistant de vie">Assistant de vie</option>
+                <option value="Soins aux personnes âgées">Soins aux personnes âgées</option>
+             
+ 
+        </select>
+        <textarea id="jobDescription" placeholder="Description du poste"></textarea>
+        <button onclick="ajouterOffre()">Publier l'Offre</button>
+    </div>
+
+    <script>
+        function afficherOffres() {
+            const jobList = document.getElementById('jobList');
+            const offres = JSON.parse(localStorage.getItem('offresEmploi')) || [];
+            jobList.innerHTML = "";
+            offres.forEach((offre, index) => {
+                const div = document.createElement('div');
+                div.className = "job";
+                div.innerHTML = `
+                    <img src="${offre.image}" width="100"><br>
+                    <strong>${offre.titre}</strong> - ${offre.salaire} <br>
+                    ${offre.description} <br>
+                    📞 ${offre.phone} | ✉️ ${offre.email} <br>
+                    <button onclick="postuler()">Postuler</button>
+                `;
+                jobList.appendChild(div);
+            });
+        }
+
+        function postuler(email, jobTitle) {
+            let candidatNom = prompt("Entrez votre nom :");
+            let candidatEmail = prompt("Entrez votre email :");
+            let message = `Bonjour, je suis intéressé par le poste de ${jobTitle}. Veuillez trouver mon CV en pièce jointe.`;
+            
+            if (candidatNom && candidatEmail) {
+                let mailtoLink = `mailto:${email}?subject=Candidature pour ${jobTitle}&body=${message}%0D%0A%0D%0A Nom : ${candidatNom}%0D%0A Email : ${candidatEmail}`;
+                window.location.href = mailtoLink;
+                alert("Votre candidature a été envoyée !");
+            } else {
+                alert("Veuillez remplir votre nom et votre email.");
+            }
+        }
+
+        function ajouterOffre() {
+            const titre = document.getElementById('jobTitle').value;
+            const salaire = document.getElementById('jobSalary').value;
+            const phone = document.getElementById('jobPhone').value;
+            const email = document.getElementById('jobEmail').value;
+            const categorie = document.getElementById('jobCategory').value;
+            const description = document.getElementById('jobDescription').value;
+            const fileInput = document.getElementById('jobPhoto');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    let offres = JSON.parse(localStorage.getItem('offresEmploi')) || [];
+                    offres.push({ titre, salaire, phone, email, categorie, description, image: e.target.result });
+                    localStorage.setItem('offresEmploi', JSON.stringify(offres));
+                    afficherOffres();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", afficherOffres);
+    </script>
+
+</body>
+</html>

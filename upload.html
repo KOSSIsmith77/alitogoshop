@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publier une vidéo - AlitogoShop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .upload-form {
+            background-color: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .upload-form h3 {
+            margin-top: 0;
+        }
+
+        .upload-form input[type="text"],
+        .upload-form textarea,
+        .upload-form input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .upload-form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .upload-form button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1 id="pageTitle">Publier une Vidéo</h1>
+        <nav>
+            <ul>
+                <li><a href="reel.html" id="homeLink">Accueil</a></li>
+                <li><a href="upload.html" id="uploadLink">Publier une vidéo</a></li>
+                <li><a href="profilvideo.html" id="profileLink">Mon Profil</a></li>
+                <li>
+                    <select id="languageSelector" onchange="changeLanguage(this)">
+                        <option value="fr">Français</option>
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                    </select>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="upload-form">
+        <h3 id="uploadTitle">Ajouter une nouvelle vidéo</h3>
+        <form id="uploadVideoForm" enctype="multipart/form-data">
+            <label for="videoTitle" id="videoTitleLabel">Titre de la vidéo</label>
+            <input type="text" id="videoTitle" required>
+            
+            <label for="videoDescription" id="videoDescriptionLabel">Description de la vidéo</label>
+            <textarea id="videoDescription" required></textarea>
+            
+            <label for="videoFile" id="videoFileLabel">Choisissez une vidéo</label>
+            <input type="file" id="videoFile" accept="video/*" required>
+
+            <button type="submit" id="uploadButton">Télécharger la vidéo</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 AlitogoShop. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        // Changement de langue
+        function changeLanguage(select) {
+            const lang = select.value;
+            document.documentElement.lang = lang;
+            translatePage(lang);
+        }
+
+        function translatePage(language) {
+            const translations = {
+                fr: {
+                    pageTitle: "Publier une Vidéo",
+                    uploadTitle: "Ajouter une nouvelle vidéo",
+                    videoTitleLabel: "Titre de la vidéo",
+                    videoDescriptionLabel: "Description de la vidéo",
+                    videoFileLabel: "Choisissez une vidéo",
+                    uploadButton: "Télécharger la vidéo",
+                    homeLink: "Accueil",
+                    uploadLink: "Publier une vidéo",
+                    profileLink: "Mon Profil"
+                },
+                en: {
+                    pageTitle: "Upload Video",
+                    uploadTitle: "Add a new video",
+                    videoTitleLabel: "Video Title",
+                    videoDescriptionLabel: "Video Description",
+                    videoFileLabel: "Choose a video",
+                    uploadButton: "Upload Video",
+                    homeLink: "Home",
+                    uploadLink: "Upload Video",
+                    profileLink: "My Profile"
+                },
+                es: {
+                    pageTitle: "Subir Video",
+                    uploadTitle: "Añadir un nuevo video",
+                    videoTitleLabel: "Título del video",
+                    videoDescriptionLabel: "Descripción del video",
+                    videoFileLabel: "Elige un video",
+                    uploadButton: "Subir video",
+                    homeLink: "Inicio",
+                    uploadLink: "Subir video",
+                    profileLink: "Mi perfil"
+                }
+            };
+
+            const translation = translations[language];
+            document.getElementById('pageTitle').textContent = translation.pageTitle;
+            document.getElementById('uploadTitle').textContent = translation.uploadTitle;
+            document.getElementById('videoTitleLabel').textContent = translation.videoTitleLabel;
+            document.getElementById('videoDescriptionLabel').textContent = translation.videoDescriptionLabel;
+            document.getElementById('videoFileLabel').textContent = translation.videoFileLabel;
+            document.getElementById('uploadButton').textContent = translation.uploadButton;
+            document.getElementById('homeLink').textContent = translation.homeLink;
+            document.getElementById('uploadLink').textContent = translation.uploadLink;
+            document.getElementById('profileLink').textContent = translation.profileLink;
+        }
+
+        // Gestion de l'ajout de vidéo
+        document.getElementById('uploadVideoForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('videoTitle').value;
+            const description = document.getElementById('videoDescription').value;
+            const file = document.getElementById('videoFile').files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function() {
+                    const videoURL = reader.result;
+                    const videoData = {
+                        title: title,
+                        description: description,
+                        url: videoURL
+                    };
+
+                    // Sauvegarder la vidéo dans localStorage
+                    const videos = JSON.parse(localStorage.getItem('videos')) || [];
+                    videos.push(videoData);
+                    localStorage.setItem('videos', JSON.stringify(videos));
+
+                    // Rediriger vers reel.html
+                    window.location.href = 'reel.html';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>

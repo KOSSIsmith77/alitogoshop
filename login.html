@@ -3,29 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
-    <link rel="stylesheet" href="login.css">
-</head>
-<body class="login"> <!-- Ajout de la classe login -->
+    <title>Connexion & Inscription</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+    background-image: url('pexels-karolina-grabowska-5980898.jpg');
+    background-size: cover;
+    background-position: center;
+}
 
-    <div class="form-container">
-        <h2>Connexion</h2>
-        <form id="login-form">
-            <input type="text" id="login" placeholder="Email ou Téléphone" required>
-            <input type="password" id="password" placeholder="Mot de passe" required>
-            <button type="submit">Se connecter</button>
-        </form>
-        <p>Pas encore inscrit ? <a href="singup.html">Créer un compte</a></p>
-        <script src="script.js"></script>
+        /* Style général */
+        body {
+            background-image: url('pexels-karolina-grabowska-5980898.jpg'); /* Remplace avec ton image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        /* Conteneur du formulaire */
+        .login-container {
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Titres */
+        .form-box h2 {
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        /* Champs de saisie */
+        .input-group {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .input-group i {
+            font-size: 18px;
+            color: white;
+            margin-right: 10px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: transparent;
+            color: white;
+            outline: none;
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Boutons */
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        /* Liens */
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Cacher un élément */
+        .hidden {
+            display: none;
+        }
+
+        /* Section Connexion via Réseaux sociaux */
+        .social-login {
+            margin-top: 20px;
+        }
+
+        .social-login button {
+            width: 100%;
+            margin: 5px 0;
+            background: #444;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .social-login button:hover {
+            opacity: 0.8;
+        }
+
+        /* Styles spécifiques pour les boutons sociaux */
+        .google { background: #DB4437; }
+        .microsoft { background: #00A4EF; }
+        .icloud { background: #A6A6A6; }
+
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="form-box" id="form-box">
+            <h2 id="form-title">Inscription</h2>
+
+            <!-- Formulaire d'inscription -->
+            <form id="signup-form">
+                <div class="input-group">
+                    <i class="fa fa-user"></i>
+                    <input type="text" id="username" placeholder="Nom d'utilisateur" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa fa-envelope"></i>
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa fa-phone"></i>
+                    <input type="tel" id="phone" placeholder="Numéro (+228)" pattern="\+228\d{8}" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" id="password" placeholder="Mot de passe" required>
+                </div>
+                <button type="submit">S'inscrire</button>
+                <p id="switch-form">Vous avez déjà un compte ? <a href="#" id="show-login">Se connecter</a></p>
+            </form>
+
+            <!-- Formulaire de connexion -->
+            <form id="login-form" class="hidden">
+                <div class="input-group">
+                    <i class="fa fa-user"></i>
+                    <input type="text" id="login-identifier" placeholder="Email ou Numéro" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" id="login-password" placeholder="Mot de passe" required>
+                </div>
+                <button type="submit">Se connecter</button>
+                <p><a href="singup.html">Mot de passe oublié ?</a></p>
+                <p id="switch-form">Pas encore inscrit ? <a href="#" id="show-signup">Créer un compte</a></p>
+            </form>
+
+            <!-- Connexion avec les réseaux sociaux -->
+            <div class="social-login">
+                <p>Ou connectez-vous avec :</p>
+                <button class="google"><i class="fab fa-google"></i> Google</button>
+                <button class="microsoft"><i class="fab fa-microsoft"></i> Microsoft</button>
+                <button class="icloud"><i class="fab fa-apple"></i> iCloud</button>
+            </div>
+        </div>
     </div>
 
     <script>
-        document.getElementById("login-form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Empêche l'envoi classique du formulaire
-            alert("Connexion réussie !");
-            window.location.href = "index2.html"; // Redirection vers l'accueil
+        document.addEventListener("DOMContentLoaded", () => {
+            const signupForm = document.getElementById("signup-form");
+            const loginForm = document.getElementById("login-form");
+            const formTitle = document.getElementById("form-title");
+            const showLogin = document.getElementById("show-login");
+            const showSignup = document.getElementById("show-signup");
+
+            // Basculer entre connexion et inscription
+            showLogin.addEventListener("click", () => {
+                signupForm.classList.add("hidden");
+                loginForm.classList.remove("hidden");
+                formTitle.textContent = "Connexion";
+            });
+
+            showSignup.addEventListener("click", () => {
+                loginForm.classList.add("hidden");
+                signupForm.classList.remove("hidden");
+                formTitle.textContent = "Inscription";
+            });
+
+            // Gestion de l'inscription
+            signupForm.addEventListener("submit", (event) => {
+                event.preventDefault();
+
+                const username = document.getElementById("username").value;
+                const email = document.getElementById("email").value;
+                const phone = document.getElementById("phone").value;
+                const password = document.getElementById("password").value;
+
+                const users = JSON.parse(localStorage.getItem("users")) || [];
+                if (users.some(user => user.email === email || user.phone === phone || user.username === username)) {
+                    alert("Cet email, numéro ou nom d'utilisateur est déjà utilisé !");
+                    return;
+                }
+
+                users.push({ username, email, phone, password });
+                localStorage.setItem("users", JSON.stringify(users));
+
+                alert("Inscription réussie !");
+                window.location.href = "index2.html";
+            });
+
+            // Gestion de la connexion
+            loginForm.addEventListener("submit", (event) => {
+                event.preventDefault();
+                alert("Connexion réussie !");
+                window.location.href = "index2.html";
+            });
         });
     </script>
- 
 </body>
 </html>

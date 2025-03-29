@@ -4,17 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abonnement</title>
-    <link rel="stylesheet" href="sell3.css">
+    <style>
+        body {
+            background-image: url("pexels-karolina-grabowska-5632381.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            text-align: center;
+            color: #007bff;
+        }
+        label {
+            font-weight: bold;
+            color: white;
+        }
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        .hidden {
+            display: none;
+        }
+        #codeVendeurBox {
+            display: none;
+            text-align: center;
+            background: rgba(0, 123, 255, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        #suivant {
+            display: none;
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
+
     <div class="container">
         <h2>Choisir un abonnement</h2>
+
+        <!-- Affichage du code vendeur généré -->
+        <div id="codeVendeurBox"></div>
+
         <label for="plan">Type d'abonnement :</label>
         <select id="plan">
             <option value="">Sélectionner...</option>
-            <option value="basique">Basique - 2300 F CFA</option>
-            <option value="medium">Medium - 5000 F CFA</option>
-            <option value="premium">Premium - 12000 F CFA</option>
+            <option value="2300">Basique - 2300 F CFA</option>
+            <option value="5000">Medium - 5000 F CFA</option>
+            <option value="12000">Premium - 12000 F CFA</option>
         </select>
 
         <label for="duree">Durée :</label>
@@ -47,8 +122,92 @@
         <label for="code">Code vendeur (si existant) :</label>
         <input type="text" id="code" placeholder="Entrez votre code vendeur">
 
+        <!-- Affichage du prix total -->
+        <p><strong>Prix Total :</strong> <span id="totalPrice">0 F CFA</span></p>
+
         <button class="button" id="valider">S'abonner</button>
+        <button id="suivant" onclick="window.location.href='sell5.html'">Suivant</button>
     </div>
-    <script src="script3.js"></script>
+
+    <script>
+        let validCodes = {}; // Stocke les codes générés avec leur date de validité
+
+        document.getElementById("payment").addEventListener("change", function() {
+            let payment = this.value;
+            document.getElementById("phoneField").classList.toggle("hidden", !(payment === "yas" || payment === "moov"));
+            document.getElementById("cardField").classList.toggle("hidden", !(payment === "visa" || payment === "carte"));
+        });
+
+        document.getElementById("duree").addEventListener("change", updateTotal);
+        document.getElementById("plan").addEventListener("change", updateTotal);
+
+        function updateTotal() {
+            let plan = document.getElementById("plan").value;
+            let duree = document.getElementById("duree").value;
+            let total = plan * duree;
+            document.getElementById("totalPrice").textContent = total + " F CFA";
+        }
+
+        document.getElementById("valider").addEventListener("click", function() {
+            let plan = document.getElementById("plan").value;
+            let duree = document.getElementById("duree").value;
+            let payment = document.getElementById("payment").value;
+            let phone = document.getElementById("phone").value;
+            let card = document.getElementById("card").value;
+            let code = document.getElementById("code").value;
+
+            if (code) {
+                if (validCodes[code] && new Date(validCodes[code]) > new Date()) {
+                    document.getElementById("codeVendeurBox").innerHTML = `<strong>Code vendeur valide !</strong>`;
+                    document.getElementById("codeVendeurBox").style.display = "block";
+                    document.getElementById("suivant").style.display = "block";
+                } else {
+                    alert("Code vendeur invalide ou expiré !");
+                }
+                return;
+            }
+
+            if (!plan || !duree || !payment) {
+                alert("Veuillez remplir toutes les informations !");
+                return;
+            }
+
+            if ((payment === "yas" || payment === "moov") && !phone) {
+                alert("Veuillez entrer un numéro de téléphone !");
+                return;
+            }
+
+            if ((payment === "visa" || payment === "carte") && !card) {
+                alert("Veuillez entrer un numéro de carte bancaire !");
+                return;
+            }
+
+            let codeVendeur = generateCodeVendeur();
+            let dateExpiration = new Date();
+            dateExpiration.setDate(dateExpiration.getDate() + (duree * 31));
+            let formattedDate = dateExpiration.toISOString().split("T")[0];
+
+            validCodes[codeVendeur] = formattedDate;
+
+            document.getElementById("codeVendeurBox").innerHTML = `
+                <strong>Code Vendeur :</strong> ${codeVendeur} <br>
+                <strong>Valide jusqu'au :</strong> ${formattedDate}
+            `;
+            document.getElementById("codeVendeurBox").style.display = "block";
+            document.getElementById("suivant").style.display = "block";
+        });
+
+        function generateCodeVendeur() {
+            let lettres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            let chiffres = "0123456789";
+            let code = "";
+            for (let i = 0; i < 5; i++) code += lettres[Math.floor(Math.random() * lettres.length)];
+            for (let i = 0; i < 4; i++) code += chiffres[Math.floor(Math.random() * chiffres.length)];
+            return code;
+        }
+    </script>
+
 </body>
 </html>
+
+

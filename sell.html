@@ -5,6 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vendre un Produit</title>
     <link rel="stylesheet" href="sell.css">
+    <style>
+        /* L'arrière-plan prend toute la taille de la fenêtre */
+        body {
+            background-image: url( "pexels-karolina-grabowska-5632381.jpg");
+            background-size: cover; /* L'image couvre toute la page */
+            background-position: center; /* Centre l'image */
+            background-attachment: fixed; /* L'image ne bouge pas quand on fait défiler */
+            height: 100vh; /* Utilise 100% de la hauteur de la fenêtre */
+            margin: 0;
+        }
+
+        /* Style pour le texte */
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 3em;
+            margin-top: 20%;
+        }
+        body { background-image: url('pexels-karolina-grabowska-5632381.jpg'); background-size: cover; }
+
+
+    </style>
 </head>
 <body>
     <header>
@@ -68,6 +90,11 @@
     </div>
 
     <script>
+        function traduire(langue) {
+    let traductions = { "fr": "Bienvenue", "en": "Welcome", "es": "Bienvenido" };
+    document.getElementById("titre").textContent = traductions[langue] || "Bienvenue";
+}
+
         document.getElementById("btnLocaliser").addEventListener("click", function () {
             window.open("https://www.google.com/maps", "_blank");
         });

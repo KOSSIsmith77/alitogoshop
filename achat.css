@@ -74,3 +74,4 @@ button:hover {
 #stars input[type="radio"]:checked ~ label {
     color: gold;
 }
+body { background-image: url('pexels-karolina-grabowska-5632381.jpg'); background-size: cover; }

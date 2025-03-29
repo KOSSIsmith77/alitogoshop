@@ -3,93 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Achat - AlitogoShop</title>
-    <link rel="stylesheet" href="achat.css">
+    <title>Détails du Produit</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #28a745;
+            margin-top: 50px;
+        }
+        #productDetails {
+            width: 70%;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        #productDetails img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        #productDetails h2 {
+            font-size: 1.8rem;
+            color: #333;
+        }
+        #productDetails p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+        #productDetails a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        #productDetails a:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Page d'Achat</h1>
-        <nav>
-            <a href="index2.html">Retour à la page d'accueil</a>
-        </nav>
-    </header>
+    <h1>Détails du Produit</h1>
 
-    <div class="product-container">
-        <!-- Détails du produit -->
-        <div id="product-details">
-            <h2>Nom du Produit</h2>
-            <p id="product-description">Description du produit...</p>
-            <p><strong>Prix: </strong><span id="product-price">5000 XOF</span></p>
-        </div>
-
-        <!-- Galerie des photos -->
-        <div class="gallery" id="product-gallery"></div>
-
-        <!-- Boutons -->
-        <div class="buttons">
-            <button id="vendor-phone" onclick="showVendorPhone()">Afficher le Numéro du Vendeur</button>
-            <button id="whatsapp" onclick="redirectToWhatsapp()">Contacter via WhatsApp</button>
-        </div>
-
-        <!-- Notation -->
-        <div class="rating">
-            <label for="rating">Notez le Vendeur :</label>
-            <div id="stars">
-                <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
-                <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
-                <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
-                <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
-                <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
-            </div>
-        </div>
-    </div>
+    <div id="productDetails"></div>
 
     <script>
-        // Exemple de données (remplacez ceci par les données réelles)
-        const category = new URLSearchParams(window.location.search).get('category');
-        const vendorPhone = '123456789'; // Numéro du vendeur
-        const whatsappLink = `https://wa.me/${vendorPhone}`; // Lien vers WhatsApp
 
-        // Afficher les images des produits depuis le localStorage
-        const gallery = document.getElementById('product-gallery');
-        const photos = JSON.parse(localStorage.getItem('photos_' + category)) || [];
+document.addEventListener('DOMContentLoaded', function() {
+    let params = new URLSearchParams(window.location.search);
+    let productTitle = params.get('title');
 
-        // Ajout des photos à la galerie
-        if (photos.length > 0) {
-            photos.forEach(photo => {
-                const imgElement = document.createElement('img');
-                imgElement.src = photo;
-                imgElement.alt = 'Image du produit';
-                imgElement.style.width = '150px';
-                imgElement.style.margin = '10px';
-                gallery.appendChild(imgElement);
-            });
-        } else {
-            gallery.innerHTML = '<p>Aucune photo disponible.</p>';
+    let products = JSON.parse(localStorage.getItem('products')) || [];
+    let product = products.find(p => p.title === productTitle);
+
+        // Récupérer l'ID du produit depuis l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('productId');
+
+        // Fonction pour afficher les détails du produit
+        function loadProductDetails() {
+            const products = JSON.parse(localStorage.getItem('products')) || [];
+            const product = products.find(p => p.id == productId);
+            
+            if (product) {
+                const productDetails = document.getElementById('productDetails');
+                productDetails.innerHTML = `
+                    <h2>${product.title}</h2>
+                    <img src="${product.image}" alt="${product.title}">
+                    <p>${product.description}</p>
+                    <p>Prix: ${product.price} F CFA</p>
+                    <p>Région: ${product.region}</p>
+                    <p>Catégorie: ${product.category}</p>
+                    <a href="whatsapp://send?phone=+1234567890">Contacter le vendeur</a>
+                `;
+            } else {
+                document.getElementById('productDetails').innerText = 'Produit non trouvé.';
+            }
         }
 
-        // Afficher le numéro du vendeur
-        function showVendorPhone() {
-            alert('Numéro du vendeur: ' + vendorPhone);
-        }
-
-        // Rediriger vers WhatsApp
-        function redirectToWhatsapp() {
-            window.open(whatsappLink, '_blank');
-        }
+        // Charger les détails du produit lorsque la page est chargée
+        window.onload = loadProductDetails;
     </script>
-
-    <div id="produit-details">
-    <img id="produit-image" src="" alt="Produit">
-    <h2 id="produit-nom"></h2>
-    <p id="produit-marque"></p>
-    <p id="produit-prix"></p>
-    <p id="produit-description"></p>
-</div>
-
- 
-
- 
-</script>
 </body>
 </html>
+
+
+
+ 

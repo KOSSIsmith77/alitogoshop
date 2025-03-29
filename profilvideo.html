@@ -1,0 +1,44 @@
+<div class="profile-section">
+    <h2>Mes vidéos</h2>
+    <div id="myVideos"></div>
+</div>
+
+<footer>
+    <p>&copy; 2025 AlitogoShop. Tous droits réservés.</p>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const videos = JSON.parse(localStorage.getItem('videos')) || [];
+        videos.forEach(function(video) {
+            displayVideo(video);
+        });
+    });
+
+    function displayVideo(videoData) {
+        const myVideos = document.getElementById('myVideos');
+        const div = document.createElement('div');
+        div.classList.add('video-card');
+
+        const video = document.createElement('video');
+        video.controls = true;
+        const source = document.createElement('source');
+        source.src = videoData.url;
+        source.type = "video/mp4";
+        video.appendChild(source);
+
+        const title = document.createElement('h3');
+        title.textContent = videoData.title;
+
+        const description = document.createElement('p');
+        description.textContent = videoData.description;
+
+        div.appendChild(video);
+        div.appendChild(title);
+        div.appendChild(description);
+
+        myVideos.appendChild(div);
+    }
+</script>
+</body>
+</html>

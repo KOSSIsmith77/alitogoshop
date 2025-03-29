@@ -30,7 +30,7 @@
         width: 150px;
     }
     section.top-page {
-        background: url("DALL·E 2025-03-12 17.42.36 - A modern and professional logo for 'AlitogoShop', an e-commerce marketplace app. The design features a shopping cart icon integrated with a digital to.web"); 
+        background: url("pexels-karolina-grabowska-5980898.jpg"); 
         background-size: cover;
         height: 80vh;
     }
@@ -52,6 +52,25 @@
         text-decoration: none;
         font-weight: bold;
     }
+    .nav.btnLogin-popup{
+
+        width: 130px;
+        height: 50px;
+        background: transparent;
+        border: 2px solid  #fff;
+        outline: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1.1em;
+        color: #fff;
+        font-weight: 500; 
+    }
+    .nav.btnLogin-popup:hover {
+        background: #fff
+         color:  #333;
+    }
+
+
     /* Barre de recherche */
     .search {
         display: flex;

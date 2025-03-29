@@ -1,34 +1,202 @@
-
-
-<!-- notifications.html -->
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notifications</title>
-    <link rel="stylesheet" href="notification.css">
-</head>
-<body>
+    <style>
+        /* Style global */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
 
+        /* En-tête */
+        header {
+            background-color: #283e4a;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        /* Section des notifications */
+        #notifications {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Liste des notifications */
+        .notification-list {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .notification-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s ease;
+            font-size: 16px;
+        }
+
+        .notification-item.unread {
+            background-color: #e9f4f7;
+        }
+
+        .notification-item:hover {
+            background-color: #f1f1f1;
+        }
+
+        .icon {
+            font-size: 20px;
+            margin-right: 10px;
+            color: #4a90e2;
+        }
+
+        button {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #357ab7;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        /* Footer - Section "Tout effacer" */
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #clear-all {
+            background-color: #d9534f;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #clear-all:hover {
+            background-color: #c9302c;
+        }
+
+        /* Responsiveness pour mobile */
+        @media (max-width: 600px) {
+            #notifications {
+                padding: 10px;
+            }
+
+            .notification-item {
+                font-size: 14px;
+            }
+
+            button {
+                padding: 6px 12px;
+            }
+
+            #clear-all {
+                padding: 10px 20px;
+            }
+        }
+    </style>
+    <style>
+        /* L'arrière-plan prend toute la taille de la fenêtre */
+        body {
+            background-image: url( "pexels-karolina-grabowska-5632381.jpg");
+            background-size: cover; /* L'image couvre toute la page */
+            background-position: center; /* Centre l'image */
+            background-attachment: fixed; /* L'image ne bouge pas quand on fait défiler */
+            height: 100vh; /* Utilise 100% de la hauteur de la fenêtre */
+            margin: 0;
+        }
+
+        /* Style pour le texte */
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 3em;
+            margin-top: 20%;
+        }
+    </style>
+</head>
+
+<body>
     <header>
-        <h1>Notifications</h1>
-        <nav>
-            <ul>
-                <li><a href="Profil.html">Profil</a></li>
-                <li><a href="notification.html">Notifications</a></li>
-                <li><a href="message.html">Messages</a></li>
-            </ul>
-        </nav>
+        <h1>Mes Notifications</h1>
     </header>
 
-    
-    <div class="notifications-container">
-        <h2>Notifications</h2>
-        <ul id="notifications-list"></ul>
-    </div>
-    <script src="notification.js"></script>
+    <section id="notifications">
+        <div class="notification-list">
+            <div class="notification-item unread">
+                <span class="icon">📦</span>
+                <p>Votre commande #12345 a été expédiée.</p>
+                <button class="mark-read">Marquer comme lu</button>
+            </div>
+            <div class="notification-item">
+                <span class="icon">🎉</span>
+                <p>Une nouvelle promotion sur vos articles favoris !</p>
+                <button class="mark-read">Marquer comme lu</button>
+            </div>
+            <div class="notification-item">
+                <span class="icon">💬</span>
+                <p>Vous avez un nouveau message de [Nom du vendeur].</p>
+                <button class="mark-read">Marquer comme lu</button>
+            </div>
+        </div>
+        <div class="footer">
+            <button id="clear-all">Tout effacer</button>
+        </div>
+    </section>
+
+    <script>
+        function traduire(langue) {
+    let traductions = { "fr": "Bienvenue", "en": "Welcome", "es": "Bienvenido" };
+    document.getElementById("titre").textContent = traductions[langue] || "Bienvenue";
+}
+
+        // Fonction pour marquer les notifications comme lues
+        document.querySelectorAll('.mark-read').forEach(button => {
+            button.addEventListener('click', () => {
+                const notification = button.closest('.notification-item');
+                notification.classList.remove('unread');
+            });
+        });
+
+        // Fonction pour effacer toutes les notifications
+        document.getElementById('clear-all').addEventListener('click', () => {
+            const notifications = document.querySelectorAll('.notification-item');
+            notifications.forEach(notification => {
+                notification.remove();
+            });
+        });
+    </script>
 </body>
+
 </html>
 
+
+ 
     
